@@ -1,0 +1,284 @@
+/* --- الإعدادات الأساسية --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: all 0.5s ease;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* --- تعريف الثيمات --- */
+:root {
+  --bg: #fff;
+  --card: rgba(255,255,255,0.3);
+  --text: #222;
+  --accent: #ff69b4;
+  --border: rgba(255,255,255,0.4);
+}
+
+body[data-theme='cute'] {
+  --bg: linear-gradient(135deg, #ffd6e8, #e5d9ff, #d7f3ff);
+  --card: rgba(255,255,255,0.25);
+  --text: #4b3f57;
+  --accent: #ff6fb5;
+  --border: rgba(255,255,255,0.4);
+  --glow: 0 10px 30px rgba(255, 111, 181, 0.2);
+}
+
+body[data-theme='neon'] {
+  --bg: linear-gradient(135deg, #050505, #091540, #14001f);
+  --card: rgba(0,0,0,0.45);
+  --text: #00ffcc;
+  --accent: #8a2be2;
+  --border: rgba(0,255,204,0.2);
+  --glow: 0 0 20px rgba(138, 43, 226, 0.5);
+}
+
+body[data-theme='minimal'] {
+  --bg: #f0f4f8;
+  --card: rgba(255, 255, 255, 0.8);
+  --text: #2d3436;
+  --accent: #00d2ff;
+  --border: rgba(0, 210, 255, 0.3);
+  --glow: 0 0 25px rgba(0, 210, 255, 0.4);
+}
+
+/* --- الخلفية المتحركة (Blobs) --- */
+.background-blobs span {
+  position: fixed;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.15;
+  filter: blur(60px);
+  animation: floatBlob 12s infinite ease-in-out;
+  z-index: -1;
+}
+
+.background-blobs span:nth-child(1) { top: 10%; left: 10%; }
+.background-blobs span:nth-child(2) { top: 60%; left: 70%; }
+.background-blobs span:nth-child(3) { top: 20%; left: 80%; }
+.background-blobs span:nth-child(4) { top: 70%; left: 20%; }
+
+@keyframes floatBlob {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-30px) scale(1.1); }
+}
+
+/* --- الهيكل العام --- */
+.container {
+  width: 92%;
+  margin: auto;
+  max-width: 1200px;
+}
+
+.glass {
+  background: var(--card);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  box-shadow: var(--glow);
+}
+
+.navbar {
+  margin: 20px auto;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hero {
+  padding: 30px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* --- منطقة العمل (Workspace) --- */
+.workspace {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 30px;
+}
+
+.drawing-zone, .upload-zone {
+  flex: 1;
+  min-width: 280px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+#drawingCanvas, #uploadPreviewBox {
+  width: 280px;
+  height: 280px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+#uploadPreviewBox {
+  border: 2px dashed var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: rgba(255,255,255,0.05);
+}
+
+/* --- الأزرار --- */
+.theme-switcher button, 
+.glass-btn, 
+.predict-btn {
+  border: 1px solid var(--border);
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  background: var(--card);
+  color: var(--text);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.predict-btn {
+  background: var(--accent);
+  color: white;
+  width: 100%;
+  padding: 15px;
+  font-size: 1.1rem;
+  margin-top: 20px;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.theme-switcher button:hover, 
+.glass-btn:hover {
+  background: var(--accent);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.predict-btn:hover {
+  transform: translateY(-5px) scale(1.02);
+  filter: brightness(1.1);
+}
+
+/* --- الموديلات والنتائج --- */
+.model-selection {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin: 20px 0;
+  justify-content: center;
+}
+
+.model-card {
+  flex: 1;
+  padding: 15px;
+  text-align: center;
+  border-radius: 18px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  background: rgba(255,255,255,0.1);
+  transition: 0.3s;
+}
+
+.model-card.active {
+  border-color: var(--accent);
+  background: rgba(var(--accent), 0.1);
+  box-shadow: 0 0 15px var(--accent);
+}
+
+.result-card {
+  margin-top: 25px;
+  padding: 20px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 20px;
+}
+
+/* --- جديد: تنسيق أشرطة الاحتمالات (Top 5 Bars) --- */
+.probability-container {
+  margin-top: 20px;
+  text-align: left;
+  background: rgba(0,0,0,0.05);
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.prob-bar-wrapper {
+  margin-bottom: 10px;
+}
+
+.prob-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+
+.prob-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.prob-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 10px;
+  transition: width 1s ease-in-out;
+}
+
+/* --- الجداول والأنميشن --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+th, td { padding: 12px; text-align: center; }
+
+.floating-card {
+  animation: floating 5s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes popIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.hidden { display: none !important; }
+
+/* --- الموبايل --- */
+@media (max-width: 900px) {
+  .input-wrapper { flex-direction: column; align-items: center; }
+  .navbar { flex-direction: column; gap: 15px; }
+  .model-selection { flex-direction: column; }
+}
