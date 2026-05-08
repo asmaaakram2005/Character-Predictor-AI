@@ -1,4 +1,6 @@
-streamlit
-tensorflow
+fastapi
+uvicorn
+python-multipart
 numpy
 pillow
+joblib
