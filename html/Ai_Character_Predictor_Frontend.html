@@ -1,112 +1,407 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>AI Character Predictor</title>
-  <link rel="stylesheet" href="/minst_model/css/Ai_Character_Predictor_Frontend.css" />
+
+  <link
+    rel="stylesheet"
+    href="/minst_model/css/Ai_Character_Predictor_Frontend.css"
+  />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
 </head>
+
 <body data-theme="cute">
 
+  <!-- ========================================= -->
+  <!-- Animated Background -->
+  <!-- ========================================= -->
+
   <div class="background-blobs">
-    <span></span><span></span><span></span><span></span>
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
   </div>
 
+  <div class="floating-particles">
+
+   <span class="star"></span>
+   <span class="star"></span>
+   <span class="star"></span>
+   <span class="star"></span>
+   <span class="star"></span>
+
+   <span class="circle"></span>
+   <span class="circle"></span>
+   <span class="circle"></span>
+
+  </div>
+
+  <!-- ========================================= -->
+  <!-- Navbar -->
+  <!-- ========================================= -->
+
   <header class="navbar glass">
-    <h1 class="logo">AI Character Predictor ✨</h1>
+
+    <h1 class="logo">
+      AI Character Predictor ✨
+    </h1>
+
     <div class="theme-switcher">
-      <button onclick="changeTheme('cute')">🎀 Cute</button>
-      <button onclick="changeTheme('neon')">👾 Neon</button>
-      <button onclick="changeTheme('minimal')">✨ Minimal</button>
+
+      <button onclick="changeTheme('cute')">
+        🎀 Cute
+      </button>
+
+      <button onclick="changeTheme('neon')">
+        👾 Neon
+      </button>
+
+      <button onclick="changeTheme('minimal')">
+        ✨ Minimal
+      </button>
+
     </div>
+
   </header>
 
+  <!-- ========================================= -->
+  <!-- Main -->
+  <!-- ========================================= -->
+
   <main class="container">
+
+    <!-- ========================================= -->
+    <!-- Hero -->
+    <!-- ========================================= -->
+
     <section class="hero glass floating-card">
-      <h2>Draw or Upload Your Character</h2>
-      <p>Analyze your character with the power of AI ✨</p>
+
+      <h2>
+        Draw or Upload Your Character
+      </h2>
+
+      <p>
+        Analyze your character with the power of AI ✨
+      </p>
+
     </section>
 
-    <section class="workspace" style="display: flex; flex-direction: column; gap: 25px; align-items: center;">
-      
-      <div class="input-wrapper glass floating-card" style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; width: 100%; max-width: 900px; padding: 30px;">
-        
-        <div class="drawing-zone" style="flex: 1; min-width: 280px; text-align: center;">
-          <h3 style="margin-bottom: 15px;">✍️ Draw Mode</h3>
-          <canvas id="drawingCanvas" width="280" height="280" style="border-radius: 20px; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); cursor: crosshair;"></canvas>
-          <div style="margin-top: 15px; display: flex; gap: 10px; align-items: center; justify-content: center;">
-            <button class="glass-btn" onclick="clearCanvas()">🧹 Clear</button>
-            <input type="range" id="brushSize" min="2" max="20" value="8" style="width: 100px;">
+    <!-- ========================================= -->
+    <!-- Workspace -->
+    <!-- ========================================= -->
+
+    <section class="workspace">
+
+      <!-- ========================================= -->
+      <!-- Input Area -->
+      <!-- ========================================= -->
+
+      <div class="input-wrapper glass floating-card">
+
+        <!-- ========================================= -->
+        <!-- Drawing Area -->
+        <!-- ========================================= -->
+
+        <div class="drawing-zone">
+
+          <h3>
+            ✍️ Draw Mode
+          </h3>
+
+          <canvas
+            id="drawingCanvas"
+            width="420"
+            height="420"
+          ></canvas>
+
+          <div class="canvas-controls">
+
+            <button
+              class="glass-btn"
+              onclick="clearCanvas()"
+            >
+              🧹 Clear
+            </button>
+
+            <div class="brush-wrapper">
+
+              <span>Brush</span>
+
+              <input
+                type="range"
+                id="brushSize"
+                min="10"
+                max="50"
+                value="34"
+              >
+
+            </div>
+
           </div>
+
         </div>
 
-        <div class="separator" style="width: 2px; background: var(--border); opacity: 0.3;"></div>
+        <!-- ========================================= -->
+        <!-- Separator -->
+        <!-- ========================================= -->
 
-        <div class="upload-zone" style="flex: 1; min-width: 280px; display: flex; flex-direction: column; align-items: center;">
-          <h3 style="margin-bottom: 15px;">📂 Upload Mode</h3>
-          <div id="uploadPreviewBox" style="width: 280px; height: 280px; border: 2px dashed var(--accent); border-radius: 20px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); position: relative; overflow: hidden;">
-            <p id="uploadPlaceholder" style="opacity: 0.5; font-size: 0.8rem;">No image selected</p>
-            <img id="imagePreview" src="" class="hidden" style="width: 100%; height: 100%; object-fit: contain; border-radius: 10px; position: absolute; top: 0; left: 0;" />
+        <div class="separator"></div>
+
+        <!-- ========================================= -->
+        <!-- Upload Area -->
+        <!-- ========================================= -->
+
+        <div class="upload-zone">
+
+          <h3>
+            📂 Upload Mode
+          </h3>
+
+          <div id="uploadPreviewBox">
+
+            <p id="uploadPlaceholder">
+              No image selected
+            </p>
+
+            <img
+              id="imagePreview"
+              src=""
+              class="hidden"
+            />
+
           </div>
-          <div style="margin-top: 15px; display: flex; gap: 10px; width: 280px;">
-            <button class="glass-btn" id="uploadBtn" style="flex: 2; background: var(--accent); color: white; border: none;">Upload</button>
-            <button class="glass-btn" id="clearImageBtn" style="flex: 1;">❌</button>
+
+          <div class="upload-buttons">
+
+            <button
+              class="glass-btn upload-main-btn"
+              id="uploadBtn"
+            >
+              Upload Image ✨
+            </button>
+
+            <button
+              class="glass-btn"
+              id="clearImageBtn"
+            >
+              ❌
+            </button>
+
           </div>
-          <input type="file" id="fileInput" accept="image/*" hidden>
+
+          <input
+            type="file"
+            id="fileInput"
+            accept="image/*"
+            hidden
+          >
+
         </div>
+
       </div>
 
-      <div class="right-panel glass floating-card" style="width: 100%; max-width: 900px;">
-        <h3 style="text-align: center; margin-bottom: 20px;">Step 2: Analysis 🤖</h3>
+      <!-- ========================================= -->
+      <!-- AI Analysis -->
+      <!-- ========================================= -->
+
+      <div class="right-panel glass floating-card">
+
+        <h3 class="analysis-title">
+          Step 2: Analysis 🤖
+        </h3>
+
+        <!-- ========================================= -->
+        <!-- Model Selection -->
+        <!-- ========================================= -->
+
         <div class="model-selection">
-          <div class="model-card active" data-model="ann">
+
+          <div
+            class="model-card"
+            data-model="ann"
+          >
+
             <h4>ANN</h4>
+
             <p>Neural Network</p>
+
           </div>
-          <div class="model-card" data-model="cnn">
+
+          <div
+            class="model-card active"
+            data-model="cnn"
+          >
+
             <h4>CNN</h4>
+
             <p>Convolutional</p>
+
           </div>
-          <div class="model-card" data-model="compare">
+
+          <div
+            class="model-card"
+            data-model="compare"
+          >
+
             <h4>Compare</h4>
+
             <p>Both Models</p>
+
           </div>
+
         </div>
 
-        <button class="predict-btn" id="predictBtn">Analyze Character ✨</button>
+        <!-- ========================================= -->
+        <!-- Predict Button -->
+        <!-- ========================================= -->
 
-        <div class="loading hidden" id="loading">
+        <button
+          class="predict-btn"
+          id="predictBtn"
+        >
+          Analyze Character ✨
+        </button>
+
+        <!-- ========================================= -->
+        <!-- Loading -->
+        <!-- ========================================= -->
+
+        <div
+          class="loading hidden"
+          id="loading"
+        >
+
           <div class="loader"></div>
-          <p>AI is thinking...</p>
+
+          <p>
+            AI is thinking...
+          </p>
+
         </div>
 
-        <div class="result-card hidden" id="resultCard">
-          <h3>Results 🎯</h3>
-          <div id="processedPreview" style="text-align: center; margin: 15px 0;">
-            <p style="font-size: 0.7rem; opacity: 0.6; margin-bottom: 5px;">AI PREVIEW:</p>
-            <img id="apiPreview" src="" style="width: 60px; height: 60px; border: 2px solid var(--accent); background: #000; border-radius: 10px;" />
+        <!-- ========================================= -->
+        <!-- Result -->
+        <!-- ========================================= -->
+
+        <div
+          class="result-card hidden"
+          id="resultCard"
+        >
+
+          <h3>
+            Results 🎯
+          </h3>
+
+          <!-- ========================================= -->
+          <!-- Processed Preview -->
+          <!-- ========================================= -->
+
+          <div id="processedPreview">
+
+            <p class="preview-label">
+              AI PREVIEW
+            </p>
+
+            <img
+              id="apiPreview"
+              src=""
+            />
+
           </div>
+
+          <!-- ========================================= -->
+          <!-- Single Result -->
+          <!-- ========================================= -->
+
           <div id="singleResult"></div>
-          <div id="compareResult" class="hidden">
+
+          <!-- ========================================= -->
+          <!-- Compare Result -->
+          <!-- ========================================= -->
+
+          <div
+            id="compareResult"
+            class="hidden"
+          >
+
             <table>
+
               <thead>
-                <tr><th>Model</th><th>Result</th><th>Confidence</th></tr>
+
+                <tr>
+
+                  <th>Model</th>
+
+                  <th>Result</th>
+
+                  <th>Confidence</th>
+
+                </tr>
+
               </thead>
+
               <tbody>
-                <tr><td>ANN</td><td id="annPrediction">-</td><td id="annConfidence">-</td></tr>
-                <tr><td>CNN</td><td id="cnnPrediction">-</td><td id="cnnConfidence">-</td></tr>
+
+                <tr>
+
+                  <td>ANN</td>
+
+                  <td id="annPrediction">-</td>
+
+                  <td id="annConfidence">-</td>
+
+                </tr>
+
+                <tr>
+
+                  <td>CNN</td>
+
+                  <td id="cnnPrediction">-</td>
+
+                  <td id="cnnConfidence">-</td>
+
+                </tr>
+
               </tbody>
+
             </table>
+
           </div>
+
         </div>
+
       </div>
 
     </section>
+
   </main>
 
-  <script src="/minst_model/js/Ai_Character_Predictor_Frontend.js"></script>
+  <!-- ========================================= -->
+  <!-- JS -->
+  <!-- ========================================= -->
+
+  <script
+    src="/minst_model/js/Ai_Character_Predictor_Frontend.js"
+  ></script>
+
 </body>
+
 </html>

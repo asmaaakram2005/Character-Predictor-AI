@@ -1,284 +1,1175 @@
-/* --- الإعدادات الأساسية --- */
+/* ==========================================
+   RESET
+========================================== */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-  transition: all 0.5s ease;
-  background: var(--bg);
-  color: var(--text);
+/* ==========================================
+   ROOT VARIABLES
+========================================== */
+
+:root {
+
+  --bg: #ffffff;
+
+  --card: rgba(255,255,255,0.25);
+
+  --text: #222;
+
+  --accent: #ff69b4;
+
+  --border: rgba(255,255,255,0.35);
+
+  --glow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* --- تعريف الثيمات --- */
-:root {
-  --bg: #fff;
-  --card: rgba(255,255,255,0.3);
-  --text: #222;
-  --accent: #ff69b4;
-  --border: rgba(255,255,255,0.4);
-}
+/* ==========================================
+   THEMES
+========================================== */
 
 body[data-theme='cute'] {
-  --bg: linear-gradient(135deg, #ffd6e8, #e5d9ff, #d7f3ff);
-  --card: rgba(255,255,255,0.25);
+
+  --bg:
+    linear-gradient(
+      135deg,
+      #ffd6e8,
+      #e5d9ff,
+      #d7f3ff
+    );
+
+  --card:
+    rgba(255,255,255,0.22);
+
   --text: #4b3f57;
+
   --accent: #ff6fb5;
-  --border: rgba(255,255,255,0.4);
-  --glow: 0 10px 30px rgba(255, 111, 181, 0.2);
+
+  --border:
+    rgba(255,255,255,0.4);
+
+  --glow:
+    0 10px 30px rgba(
+      255,
+      111,
+      181,
+      0.25
+    );
 }
 
 body[data-theme='neon'] {
-  --bg: linear-gradient(135deg, #050505, #091540, #14001f);
-  --card: rgba(0,0,0,0.45);
+
+  --bg:
+    linear-gradient(
+      135deg,
+      #040404,
+      #091540,
+      #170022
+    );
+
+  --card:
+    rgba(0,0,0,0.45);
+
   --text: #00ffcc;
+
   --accent: #8a2be2;
-  --border: rgba(0,255,204,0.2);
-  --glow: 0 0 20px rgba(138, 43, 226, 0.5);
+
+  --border:
+    rgba(0,255,204,0.15);
+
+  --glow:
+    0 0 25px rgba(
+      138,
+      43,
+      226,
+      0.45
+    );
 }
 
 body[data-theme='minimal'] {
-  --bg: #f0f4f8;
-  --card: rgba(255, 255, 255, 0.8);
+
+  --bg: #eef3f8;
+
+  --card:
+    rgba(255,255,255,0.75);
+
   --text: #2d3436;
-  --accent: #00d2ff;
-  --border: rgba(0, 210, 255, 0.3);
-  --glow: 0 0 25px rgba(0, 210, 255, 0.4);
+
+  --accent: #00b7ff;
+
+  --border:
+    rgba(0,183,255,0.2);
+
+  --glow:
+    0 0 20px rgba(
+      0,
+      183,
+      255,
+      0.2
+    );
 }
 
-/* --- الخلفية المتحركة (Blobs) --- */
+/* ==========================================
+   BODY
+========================================== */
+
+body {
+
+  font-family: 'Poppins', sans-serif;
+
+  min-height: 100vh;
+
+  overflow-x: hidden;
+
+  background: var(--bg);
+
+  color: var(--text);
+
+  transition: 0.4s ease;
+}
+
+/* ==========================================
+   BACKGROUND BLOBS
+========================================== */
+
 .background-blobs span {
+
   position: fixed;
-  width: 250px;
-  height: 250px;
+
+  width: 260px;
+  height: 260px;
+
   border-radius: 50%;
+
   background: var(--accent);
-  opacity: 0.15;
-  filter: blur(60px);
-  animation: floatBlob 12s infinite ease-in-out;
+
+  opacity: 0.14;
+
+  filter: blur(70px);
+
   z-index: -1;
+
+  animation:
+    floatBlob 14s infinite ease-in-out;
 }
 
-.background-blobs span:nth-child(1) { top: 10%; left: 10%; }
-.background-blobs span:nth-child(2) { top: 60%; left: 70%; }
-.background-blobs span:nth-child(3) { top: 20%; left: 80%; }
-.background-blobs span:nth-child(4) { top: 70%; left: 20%; }
+.background-blobs span:nth-child(1) {
+
+  top: 8%;
+  left: 8%;
+}
+
+.background-blobs span:nth-child(2) {
+
+  top: 65%;
+  left: 70%;
+}
+
+.background-blobs span:nth-child(3) {
+
+  top: 15%;
+  left: 80%;
+}
+
+.background-blobs span:nth-child(4) {
+
+  top: 75%;
+  left: 20%;
+}
 
 @keyframes floatBlob {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  50% { transform: translateY(-30px) scale(1.1); }
+
+  0%,100% {
+
+    transform:
+      translateY(0px)
+      scale(1);
+  }
+
+  50% {
+
+    transform:
+      translateY(-30px)
+      scale(1.1);
+  }
 }
 
-/* --- الهيكل العام --- */
+/* ==========================================
+   CONTAINER
+========================================== */
+
 .container {
+
   width: 92%;
+
+  max-width: 1350px;
+
   margin: auto;
-  max-width: 1200px;
 }
+
+/* ==========================================
+   GLASS EFFECT
+========================================== */
 
 .glass {
+
   background: var(--card);
-  backdrop-filter: blur(15px);
-  border: 1px solid var(--border);
+
+  border:
+    1px solid var(--border);
+
+  backdrop-filter: blur(18px);
+
   border-radius: 30px;
+
   box-shadow: var(--glow);
 }
 
+/* ==========================================
+   NAVBAR
+========================================== */
+
 .navbar {
+
   margin: 20px auto;
-  padding: 15px 30px;
+
+  padding: 18px 28px;
+
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
 }
+
+.logo {
+
+  font-size: 1.6rem;
+
+  font-weight: 700;
+}
+
+/* ==========================================
+   THEME BUTTONS
+========================================== */
+
+.theme-switcher {
+
+  display: flex;
+
+  gap: 10px;
+}
+
+.theme-switcher button {
+
+  padding: 10px 18px;
+
+  border-radius: 50px;
+
+  border: 1px solid var(--border);
+
+  background: var(--card);
+
+  color: var(--text);
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.35s;
+}
+
+.theme-switcher button:hover {
+
+  background: var(--accent);
+
+  color: white;
+
+  transform:
+    translateY(-3px)
+    scale(1.03);
+}
+
+/* ==========================================
+   HERO
+========================================== */
 
 .hero {
-  padding: 30px;
+
+  padding: 40px;
+
+  margin-bottom: 35px;
+
   text-align: center;
-  margin-bottom: 30px;
+
+  animation:
+    softFloat 5s ease-in-out infinite;
 }
 
-/* --- منطقة العمل (Workspace) --- */
-.workspace {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  margin-bottom: 40px;
+.hero h2 {
+
+  font-size: 2.3rem;
+
+  margin-bottom: 12px;
 }
+
+.hero p {
+
+  opacity: 0.75;
+}
+
+/* ==========================================
+   FLOATING
+========================================== */
+
+@keyframes softFloat {
+
+  0%,100% {
+
+    transform: translateY(0px);
+  }
+
+  50% {
+
+    transform: translateY(-7px);
+  }
+}
+
+/* ==========================================
+   WORKSPACE
+========================================== */
+
+.workspace {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 30px;
+
+  margin-bottom: 50px;
+}
+
+/* ==========================================
+   INPUT WRAPPER
+========================================== */
 
 .input-wrapper {
+
   display: flex;
-  flex-wrap: wrap;
+
   justify-content: center;
-  gap: 30px;
-  padding: 30px;
-}
 
-.drawing-zone, .upload-zone {
-  flex: 1;
-  min-width: 280px;
-  max-width: 350px;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 15px;
+
+  flex-wrap: wrap;
+
+  gap: 35px;
+
+  padding: 35px;
 }
 
-#drawingCanvas, #uploadPreviewBox {
-  width: 280px;
-  height: 280px;
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease;
+/* ==========================================
+   DRAWING + UPLOAD
+========================================== */
+
+.drawing-zone,
+.upload-zone {
+
+  flex: 1;
+
+  min-width: 320px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 18px;
 }
+
+.drawing-zone h3,
+.upload-zone h3 {
+
+  font-size: 1.2rem;
+}
+
+/* ==========================================
+   CANVAS
+========================================== */
+
+#drawingCanvas {
+
+  width: 420px;
+
+  height: 420px;
+
+  background: black;
+
+  border-radius: 25px;
+
+  cursor: crosshair;
+
+  transition: 0.35s;
+
+  box-shadow:
+    0 0 25px rgba(255,255,255,0.1);
+}
+
+#drawingCanvas:hover {
+
+  transform: scale(1.01);
+}
+
+/* ==========================================
+   THEME GLOW
+========================================== */
+
+body[data-theme='cute'] #drawingCanvas {
+
+  box-shadow:
+    0 0 30px rgba(
+      255,
+      105,
+      180,
+      0.4
+    );
+}
+
+body[data-theme='neon'] #drawingCanvas {
+
+  box-shadow:
+    0 0 40px #8a2be2;
+}
+
+body[data-theme='minimal'] #drawingCanvas {
+
+  box-shadow:
+    0 0 25px rgba(
+      0,
+      183,
+      255,
+      0.25
+    );
+}
+
+/* ==========================================
+   CANVAS CONTROLS
+========================================== */
+
+.canvas-controls {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+}
+
+.brush-wrapper {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+/* ==========================================
+   UPLOAD BOX
+========================================== */
 
 #uploadPreviewBox {
-  border: 2px dashed var(--accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+  width: 420px;
+
+  height: 420px;
+
+  border:
+    2px dashed var(--accent);
+
+  border-radius: 25px;
+
   overflow: hidden;
-  background: rgba(255,255,255,0.05);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  position: relative;
+
+  background:
+    rgba(255,255,255,0.05);
 }
 
-/* --- الأزرار --- */
-.theme-switcher button, 
-.glass-btn, 
-.predict-btn {
-  border: 1px solid var(--border);
-  padding: 10px 20px;
-  border-radius: 50px;
-  cursor: pointer;
-  font-weight: 600;
-  background: var(--card);
-  color: var(--text);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+#uploadPlaceholder {
+
+  opacity: 0.55;
 }
 
-.predict-btn {
-  background: var(--accent);
-  color: white;
+#imagePreview {
+
   width: 100%;
-  padding: 15px;
-  font-size: 1.1rem;
-  margin-top: 20px;
-  border: none;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+  height: 100%;
+
+  object-fit: contain;
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  animation:
+    popIn 0.4s ease;
 }
 
-.theme-switcher button:hover, 
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.glass-btn,
+.predict-btn {
+
+  border: none;
+
+  cursor: pointer;
+
+  border-radius: 50px;
+
+  font-weight: 600;
+
+  transition:
+    0.35s cubic-bezier(
+      0.175,
+      0.885,
+      0.32,
+      1.275
+    );
+}
+
+.glass-btn {
+
+  padding: 12px 20px;
+
+  background: var(--card);
+
+  color: var(--text);
+
+  border:
+    1px solid var(--border);
+}
+
 .glass-btn:hover {
+
   background: var(--accent);
+
   color: white;
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+  transform:
+    translateY(-4px)
+    scale(1.03);
+}
+
+.predict-btn {
+
+  width: 100%;
+
+  padding: 16px;
+
+  margin-top: 20px;
+
+  font-size: 1.05rem;
+
+  background: var(--accent);
+
+  color: white;
+
+  box-shadow:
+    0 10px 20px rgba(0,0,0,0.12);
 }
 
 .predict-btn:hover {
-  transform: translateY(-5px) scale(1.02);
-  filter: brightness(1.1);
+
+  transform:
+    translateY(-5px)
+    scale(1.02);
 }
 
-/* --- الموديلات والنتائج --- */
-.model-selection {
+.predict-btn:active {
+
+  transform: scale(0.96);
+}
+
+/* ==========================================
+   UPLOAD BUTTONS
+========================================== */
+
+.upload-buttons {
+
   display: flex;
-  flex-direction: row;
-  gap: 15px;
-  margin: 20px 0;
+
+  gap: 12px;
+
+  width: 420px;
+}
+
+.upload-main-btn {
+
+  flex: 1;
+}
+
+/* ==========================================
+   SEPARATOR
+========================================== */
+
+.separator {
+
+  width: 2px;
+
+  height: 460px;
+
+  background: var(--border);
+
+  opacity: 0.3;
+}
+
+/* ==========================================
+   RIGHT PANEL
+========================================== */
+
+.right-panel {
+
+  padding: 30px;
+}
+
+.analysis-title {
+
+  text-align: center;
+
+  margin-bottom: 25px;
+}
+
+/* ==========================================
+   MODEL SELECTION
+========================================== */
+
+.model-selection {
+
+  display: flex;
+
+  gap: 18px;
+
   justify-content: center;
+
+  flex-wrap: wrap;
 }
 
 .model-card {
+
   flex: 1;
-  padding: 15px;
+
+  min-width: 160px;
+
+  padding: 18px;
+
+  border-radius: 22px;
+
   text-align: center;
-  border-radius: 18px;
-  border: 2px solid transparent;
+
   cursor: pointer;
-  background: rgba(255,255,255,0.1);
-  transition: 0.3s;
+
+  background:
+    rgba(255,255,255,0.08);
+
+  transition: 0.35s;
+}
+
+.model-card:hover {
+
+  transform:
+    translateY(-5px)
+    scale(1.03);
 }
 
 .model-card.active {
-  border-color: var(--accent);
-  background: rgba(var(--accent), 0.1);
-  box-shadow: 0 0 15px var(--accent);
+
+  border:
+    2px solid var(--accent);
+
+  box-shadow:
+    0 0 20px var(--accent);
 }
+
+/* ==========================================
+   LOADING
+========================================== */
+
+.loading {
+
+  margin-top: 30px;
+
+  text-align: center;
+}
+
+.loader {
+
+  width: 50px;
+
+  height: 50px;
+
+  margin: auto;
+
+  border-radius: 50%;
+
+  border:
+    4px solid rgba(255,255,255,0.15);
+
+  border-top:
+    4px solid var(--accent);
+
+  animation:
+    spin 1s linear infinite;
+}
+
+@keyframes spin {
+
+  100% {
+
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================
+   RESULT CARD
+========================================== */
 
 .result-card {
-  margin-top: 25px;
-  padding: 20px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 20px;
-}
 
-/* --- جديد: تنسيق أشرطة الاحتمالات (Top 5 Bars) --- */
-.probability-container {
-  margin-top: 20px;
-  text-align: left;
-  background: rgba(0,0,0,0.05);
-  padding: 15px;
-  border-radius: 15px;
-}
+  margin-top: 28px;
 
-.prob-bar-wrapper {
-  margin-bottom: 10px;
-}
+  padding: 25px;
 
-.prob-info {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  margin-bottom: 4px;
-}
+  border-radius: 25px;
 
-.prob-bar-bg {
-  width: 100%;
-  height: 8px;
-  background: rgba(255,255,255,0.4);
-  border-radius: 10px;
-  overflow: hidden;
-}
+  background:
+    rgba(255,255,255,0.08);
 
-.prob-bar-fill {
-  height: 100%;
-  background: var(--accent);
-  border-radius: 10px;
-  transition: width 1s ease-in-out;
-}
-
-/* --- الجداول والأنميشن --- */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
-}
-th, td { padding: 12px; text-align: center; }
-
-.floating-card {
-  animation: floating 5s ease-in-out infinite;
-}
-
-@keyframes floating {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  animation:
+    popIn 0.5s ease;
 }
 
 @keyframes popIn {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+
+  from {
+
+    opacity: 0;
+
+    transform:
+      scale(0.92);
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform:
+      scale(1);
+  }
 }
 
-.hidden { display: none !important; }
+/* ==========================================
+   PROCESSED PREVIEW
+========================================== */
 
-/* --- الموبايل --- */
-@media (max-width: 900px) {
-  .input-wrapper { flex-direction: column; align-items: center; }
-  .navbar { flex-direction: column; gap: 15px; }
-  .model-selection { flex-direction: column; }
+#processedPreview {
+
+  text-align: center;
+
+  margin: 18px 0;
+}
+
+.preview-label {
+
+  font-size: 0.75rem;
+
+  opacity: 0.6;
+
+  margin-bottom: 8px;
+}
+
+#apiPreview {
+
+  width: 70px;
+
+  height: 70px;
+
+  background: black;
+
+  border:
+    2px solid var(--accent);
+
+  border-radius: 12px;
+}
+
+/* ==========================================
+   PROBABILITY BARS
+========================================== */
+
+.probability-container {
+
+  margin-top: 22px;
+
+  padding: 18px;
+
+  border-radius: 18px;
+
+  background:
+    rgba(255,255,255,0.05);
+}
+
+.prob-bar-wrapper {
+
+  margin-bottom: 12px;
+}
+
+.prob-info {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-bottom: 5px;
+
+  font-size: 0.9rem;
+}
+
+.prob-bar-bg {
+
+  width: 100%;
+
+  height: 9px;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  background:
+    rgba(255,255,255,0.15);
+}
+
+.prob-bar-fill {
+
+  height: 100%;
+
+  border-radius: 20px;
+
+  transition:
+    width 1s ease;
+}
+
+/* ==========================================
+   TABLE
+========================================== */
+
+table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  margin-top: 20px;
+}
+
+th,
+td {
+
+  padding: 14px;
+
+  text-align: center;
+}
+
+/* ==========================================
+   HIDDEN
+========================================== */
+
+.hidden {
+
+  display: none !important;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 1000px) {
+
+  .input-wrapper {
+
+    flex-direction: column;
+  }
+
+  .separator {
+
+    width: 100%;
+
+    height: 2px;
+  }
+
+  .navbar {
+
+    flex-direction: column;
+
+    gap: 15px;
+  }
+
+  .model-selection {
+
+    flex-direction: column;
+  }
+
+  #drawingCanvas,
+  #uploadPreviewBox,
+  .upload-buttons {
+
+    width: 100%;
+  }
+}
+/* ==========================================
+   FLOATING PARTICLES
+========================================== */
+
+.floating-particles {
+
+  position: fixed;
+
+  inset: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  z-index: -1;
+}
+
+/* ==========================================
+   SHARED PARTICLES
+========================================== */
+
+.star,
+.circle {
+
+  position: absolute;
+
+  animation:
+    floatParticle linear infinite;
+}
+
+/* ==========================================
+   STARS
+========================================== */
+
+.star {
+
+  width: 12px;
+  height: 12px;
+
+  border-radius: 50%;
+
+  opacity: 0.8;
+}
+
+/* Cute Theme */
+
+body[data-theme='cute'] .star {
+
+  background: #ffffff;
+
+  box-shadow:
+    0 0 15px #ff9ad5,
+    0 0 25px #ffffff;
+}
+
+/* Neon Theme */
+
+body[data-theme='neon'] .star {
+
+  background: #00ffcc;
+
+  box-shadow:
+    0 0 15px #00ffcc,
+    0 0 30px #8a2be2;
+}
+
+/* Minimal Theme */
+
+body[data-theme='minimal'] .star {
+
+  background: #00b7ff;
+
+  box-shadow:
+    0 0 12px rgba(0,183,255,0.4);
+}
+
+/* ==========================================
+   CIRCLES
+========================================== */
+
+.circle {
+
+  width: 80px;
+  height: 80px;
+
+  border-radius: 50%;
+
+  filter: blur(10px);
+
+  opacity: 0.12;
+}
+
+/* Cute */
+
+body[data-theme='cute'] .circle {
+
+  background:
+    radial-gradient(
+      circle,
+      #ffb6d9,
+      transparent
+    );
+}
+
+/* Neon */
+
+body[data-theme='neon'] .circle {
+
+  background:
+    radial-gradient(
+      circle,
+      #8a2be2,
+      transparent
+    );
+}
+
+/* Minimal */
+
+body[data-theme='minimal'] .circle {
+
+  background:
+    radial-gradient(
+      circle,
+      #00b7ff,
+      transparent
+    );
+}
+
+/* ==========================================
+   RANDOM POSITIONS
+========================================== */
+
+.star:nth-child(1) {
+
+  top: 10%;
+  left: 15%;
+
+  animation-duration: 8s;
+}
+
+.star:nth-child(2) {
+
+  top: 30%;
+  left: 80%;
+
+  animation-duration: 10s;
+}
+
+.star:nth-child(3) {
+
+  top: 70%;
+  left: 20%;
+
+  animation-duration: 9s;
+}
+
+.star:nth-child(4) {
+
+  top: 85%;
+  left: 60%;
+
+  animation-duration: 11s;
+}
+
+.star:nth-child(5) {
+
+  top: 40%;
+  left: 45%;
+
+  animation-duration: 13s;
+}
+
+.circle:nth-child(6) {
+
+  top: 20%;
+  left: 60%;
+
+  animation-duration: 18s;
+}
+
+.circle:nth-child(7) {
+
+  top: 75%;
+  left: 75%;
+
+  animation-duration: 20s;
+}
+
+.circle:nth-child(8) {
+
+  top: 60%;
+  left: 10%;
+
+  animation-duration: 22s;
+}
+
+/* ==========================================
+   ANIMATION
+========================================== */
+
+@keyframes floatParticle {
+
+  0% {
+
+    transform:
+      translateY(0px)
+      translateX(0px)
+      scale(1);
+
+    opacity: 0.2;
+  }
+
+  50% {
+
+    transform:
+      translateY(-30px)
+      translateX(20px)
+      scale(1.15);
+
+    opacity: 0.9;
+  }
+
+  100% {
+
+    transform:
+      translateY(0px)
+      translateX(0px)
+      scale(1);
+
+    opacity: 0.2;
+  }
 }
