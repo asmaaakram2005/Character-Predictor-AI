@@ -1,3 +1,9 @@
-streamlit
+fastapi
+uvicorn
+tensorflow
 numpy
 pillow
+python-multipart
+joblib
+matplotlib
+scikit-learn
