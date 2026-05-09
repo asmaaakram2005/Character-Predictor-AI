@@ -133,6 +133,39 @@ function draw(event) {
   ctx.moveTo(x, y);
 }
 
+canvas.addEventListener("touchstart", function (e) {
+    if (e.target == canvas) {
+        e.preventDefault(); 
+        var touch = e.touches[0];
+        var rect = canvas.getBoundingClientRect();
+        var mouseEvent = new MouseEvent("mousedown", {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    }
+}, false);
+
+canvas.addEventListener("touchmove", function (e) {
+    if (e.target == canvas) {
+        e.preventDefault();
+        var touch = e.touches[0];
+        var mouseEvent = new MouseEvent("mousemove", {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    }
+}, false);
+
+canvas.addEventListener("touchend", function (e) {
+    if (e.target == canvas) {
+        e.preventDefault();
+        var mouseEvent = new MouseEvent("mouseup", {});
+        canvas.dispatchEvent(mouseEvent);
+    }
+}, false);
+
 // =========================
 // Upload System
 // =========================
