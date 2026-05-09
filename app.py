@@ -11,6 +11,17 @@ import base64
 
 from PIL import Image, ImageOps
 
+import os
+
+from pathlib import Path
+
+
+
+BASE_DIR = Path(__file__).resolve().parent
+
+
+
+
 # ==========================================
 # FastAPI
 # ==========================================
@@ -19,40 +30,48 @@ app = FastAPI()
 # ==========================================
 # Static Files
 # ==========================================
-app.mount("/minst_model/css", StaticFiles(directory="css"), name="css")
-app.mount("/minst_model/js", StaticFiles(directory="js"), name="js")
+app.mount("/css", StaticFiles(directory=str(BASE_DIR / "css")), name="css")
+app.mount("/js", StaticFiles(directory=str(BASE_DIR / "js")), name="js")
 
 # ==========================================
 # CORS
 # ==========================================
+
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # ==========================================
 # Load Models
 # ==========================================
 print("Loading models...")
+try:
 
-ann_model = tf.keras.models.load_model("typography_model.keras")
+    ann_path = str(BASE_DIR / "typography_model.h5")
+    cnn_path = str(BASE_DIR / "typography_model_cnn.h5")
+    encoder_path = str(BASE_DIR / "label_encoder.joblib")
 
-cnn_model = tf.keras.models.load_model("typography_model_cnn.keras")
-
-label_encoder = joblib.load("label_encoder.joblib")
-
-print("Models loaded successfully ✅")
+    ann_model = tf.keras.models.load_model(ann_path)
+    cnn_model = tf.keras.models.load_model(cnn_path)
+    label_encoder = joblib.load(encoder_path)
+    print("Models loaded successfully ✅")
+except Exception as e:
+    print(f"Error loading models: {e}")
 
 # ==========================================
 # Home
 # ==========================================
 @app.get("/")
 def home():
-    return FileResponse("html/Ai_Character_Predictor_Frontend.html")
-
+    
+    html_path = str(BASE_DIR / "html" / "Ai_Character_Predictor_Frontend.html")
+    return FileResponse(html_path)
 # ==========================================
 # Image Preprocessing
 # ==========================================
