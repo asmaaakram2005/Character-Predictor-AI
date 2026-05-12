@@ -4,7 +4,7 @@ An interactive web application that uses **Deep Learning** to predict handwritte
 
 ## 🚀 Live Demo
 You can try the application here: 
-[Link to your Hugging Face Space](https://asmaaakram2005-character-predictor-ai2.hf.space)
+[Link to my Hugging Face Space](https://asmaaakram2005-character-predictor-ai2.hf.space)
 
 ## ✨ Features
 * **Dual Model Support:** Compare between **ANN** and **CNN** architectures.
